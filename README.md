@@ -1,207 +1,69 @@
 # vue-upload-component
-
-> Vue.js file upload component, Support for multiple file uploads, progress, html4, ie9
-**Html4 does not support the progress bar, file size, accept, timeout, headers, response status code error of judgment**
+[![npm](https://img.shields.io/npm/dm/vue-upload-component.svg?style=flat-square)](https://www.npmjs.com/package/vue-upload-component)  [![npm](https://img.shields.io/npm/v/vue-upload-component.svg?style=flat-square)](https://www.npmjs.com/package/vue-upload-component)  [![license](https://img.shields.io/github/license/lian-yue/vue-upload-component.svg?style=flat-square)](https://www.npmjs.com/package/vue-upload-component)  [![gzip](http://img.badgesize.io/lian-yue/vue-upload-component/master/dist/vue-upload-component.min.js.svg?compression=gzip&style=flat-square)](https://github.com/lian-yue/vue-upload-component)
 
 
-
-## Install
-
-``` bash
-    npm install vue-upload-component@next --save
-```
-
-### CommonJS
-```js
-    var FileUpload = require('vue-upload-component');
-
-    new Vue({
-        template: '<file-upload post-action="/post.method" put-action="/put.method"></file-upload>',
-        components: {
-            FileUpload: FileUpload
-        }
-    })
-
-```
-
-### ES6
-```js
-    import FileUpload from 'vue-upload-component'
-    new Vue({
-        template: '<file-upload post-action="/post.method" put-action="/put.method"></file-upload>',
-        components: {
-            FileUpload
-        }
-    })
-
-```
+> Vue.js file upload component
+> The component is just a button
 
 
-## Examples
+  - [x] Multi-file upload
+  - [x] Upload directory
+  - [x] Drag upload
+  - [x] Drag the directory
+  - [x] Upload multiple files at the same time
+  - [x] html4 (IE 9)
+  - [x] `PUT` method
+  - [x] Customize the filter
+  - [x] thumbnails
+
+
+
+# Example
 
 https://lian-yue.github.io/vue-upload-component/
 
-
-https://github.com/lian-yue/vue-upload-component/tree/2.0/example/
-
-``` html
-    <!-- Example file ./index.html -->
-    <!-- Example file ./src/example.js -->
-    <div id="app">
-        <file-upload title="Add upload files"></file-upload>
-    </div>
-
-    <script type="text/javascript">
-    var FileUpload = require('vue-upload-component');
-
-    new Vue({
-        el:'#app',
-        components: {
-            FileUpload: FileUpload,
-        },
-    });
-    </script>
-```
-
-## Build Setup
+# Installation
 
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
+npm install vue-upload-component --save
 ```
 
+# Documentation
+
+https://lian-yue.github.io/vue-upload-component/#/documents
 
 
-# Setting
+
+---
 
 
-## Props
-``` html
-<file-upload
-    title="Add upload files"
 
-    name="post file name"
 
-    drop="Boolean (true = $parent) or Element or Css Selector"
+> Vue.js 文件上传组建
+> 组件只是一个按钮
 
-    extensions="Array or String or Regular"
+  - [x] 上传多文件
+  - [x] 上传目录
+  - [x] 拖拽
+  - [x] 拖拽目录
+  - [x] 多线程
+  - [x] html4(IE 9)
+  - [x] `PUT` 方法
+  - [x] 自定义过滤器
+  - [x] 缩略图
 
-    post-action="./post.method"
+# 演示
 
-    put-action="./put.method"
+https://lian-yue.github.io/vue-upload-component/#/zh-cn/
 
-    accept="accept"
 
-    multiple="true or false"
 
-    size="max Size"
+# 安装
 
-    timeout="3600000"
-
-    events="Object"
-
-    headers="Request headers object"
-
-    data="Request data object"
-
-    files="Upload files"
-
-    thread="Number  (Multi-file uploads at the same time)"
-    >
-</file-upload>
+``` bash
+npm install vue-upload-component --save
 ```
 
+# 文档
 
-
-
-### Props events
-``` js
-    events: {
-        add(file, component) {
-            console.log('add');
-            if (this.auto) {
-                component.active = true;
-            }
-            file.headers['X-Filename'] = encodeURIComponent(file.name)
-            file.data.filename = file.name
-
-            // file.putAction = 'xxx'
-            // file.postAction = 'xxx'
-        },
-        progress(file, component) {
-            console.log('progress ' + file.progress);
-        },
-        after(file, component) {
-            console.log('after');
-        },
-        before(file, component) {
-            console.log('before');
-        }
-    }
-```
-
-
-
-### Props files
-``` js
-    [
-        {
-            id: 'String', // Read only
-            name: 'filename String',
-            size: 'filesize   Number',   // -1  = html4
-            progress: 'progress String', // Read only
-            speed: "Speed Number", // Read only
-            active: 'active Boolean',   // set active = fasle  abort upload
-            error: 'error String',  // Read only
-            success: 'success Boolean', // Read only
-            response: 'Response data Object or String', // Read only
-            putAction: 'String uri',
-            postAction: 'String uri',
-            timeout: "Number",
-            headers: {
-                "X-Csrf-Token": "xxxx",
-            },
-            data: {
-                "_csrf_token": "xxxxxx",
-            },
-
-            xhr: "False or XMLHttpRequest object",             // html5
-            iframe: "False or Element object",                  // html4
-            file: "undefined or File object"               // html5
-            el: "undefined or Input object"
-        }
-    ]
-```
-
-
-
-
-
-## data
-``` js
-    {
-        mode: 'html5',  // html5 or html4
-
-        active: false,   // set active = false abort upload
-
-        uploaded: true,  // Read only
-
-        dropActive: false,  // Read only
-
-        destroy: false,  // Read only    Component destroy = true
-    }
-```
-
-
-## methods
-````
-    clear()  // Clear all files
-    remove(id or file Object)  // Remove a file   return   file object or  false
-    abort(id or file Object)  // Stop a file upload return   file object or  false
-```
+https://lian-yue.github.io/vue-upload-component/#/zh-cn/documents
